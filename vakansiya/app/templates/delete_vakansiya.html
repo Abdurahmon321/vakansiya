@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<p>Are you sure you want to delete "{{ recipe.name }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+</form>
+{% endblock main %}

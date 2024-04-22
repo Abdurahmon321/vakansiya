@@ -1,0 +1,103 @@
+{% extends 'base.html'%}
+
+
+{% block main %}
+<section style="background-color: #eee;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="{{ user_profile.img.url }}"
+                             alt="avatar"
+                             class="rounded-circle img-fluid" style="width: 150px;">
+                        <h5 class="my-3">{{ user.first_name }} {{ user.last_name }}</h5>
+                        <p class="text-muted mb-1">{{ user_profile.status }}</p>
+                        <p class="text-muted mb-4">{{ user_profile.address }}</p>
+                        <div class="d-flex justify-content-center mb-2">
+                            {% if request.user.id == user_profile.user_id %}
+                            <a href="{% url 'user_edit_profile' user_profile.user_id %}" type="button"
+                               class="btn btn-primary">Edit</a>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4 mb-lg-0">
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Full Name</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ user_profile.firstname }} {{ user_profile.lastname }}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Email</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ user_profile.email }}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Phone</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ user_profile.phone }}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Mobile</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ user_profile.mobile }}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Address</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ user_profile.address }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for vakansiya in vakansiya %}
+                    <div class="col-md-5">
+                        <div class="card mb-6 shadow-sm">
+                            <img src="{{ vakansiya.img.url }}" class="card-img-top" alt="{{ vakansiya.img.url }}">
+                            <div class="card-body">
+                                <h5 class="card-title"><a href="{% url 'detail_vakansiya' vakansiya.pk %}">{{ vakansiya.name }}</a></h5>
+                                <p class="card-text">Vakansiya haqida: {{ vakansiya.vakansiya_haqida|truncatewords:50 }}</p>
+                                <p class="card-text">Tajriba talab qilinadi: {{ vakansiya.tajriba_talab_qilinadi}} yil</p>
+                                <p class="card-text">Ish haqida: {{ vakansiya.ish_haqida }}</p>
+                                <p class="card-text">Yosh chagaras: {{ vakansiya.yosh_chegar }}</p>
+                                <p class="card-text">Author: {{ vakansiya.author }}</p>
+                                <p class="card-text">Yaratilgan vaqti: {{ vakansiya.vaqti }}</p>
+
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock main %}

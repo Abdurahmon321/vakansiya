@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div class="container" style="margin-bottom: 10px;">
+<h1>{% if recipe %}Update Recipe{% else %}Create Recipe{% endif %}</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+</div>
+{% endblock main %}
